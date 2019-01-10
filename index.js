@@ -16,7 +16,7 @@ function doItPromises() {
 }
 
 // literal translation of doItPromises
-// you can see how the nesting is actually kind of messy
+// you can see how the nesting is still messy but improved a bit by async/await over the Promises version
 async function doItAsync() {
     try {
         let response = await fetch(url);
@@ -70,12 +70,19 @@ async function gotcha() {
     // do something with results
 }
 
+
+
 function shouldThrowAnError() {
     return Promise.reject(new Error('Oops'));
+}
+
+async function throwsAnErrorSynchronously() {
+    throw new Error('Oops');
 }
 
 module.exports = {
     doItAsync,
     doItPromises,
-    shouldThrowAnError
+    shouldThrowAnError,
+    throwsAnErrorSynchronously
 };

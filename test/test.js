@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { doItAsync, doItPromises, shouldThrowAnError } = require('../index');
+const { doItAsync, doItPromises, shouldThrowAnError, throwsAnErrorSynchronously } = require('../index');
 
 describe('tests', function () {
     describe('promises', function () {
@@ -57,6 +57,16 @@ describe('tests', function () {
             catch (err) {
                 expect(err.message).to.equal('Oops');
             }
+        });
+
+        it('async keyword turns sync errors into rejected promises', function () {
+            return throwsAnErrorSynchronously()
+                .then(
+                    () => expect.fail(),
+                    err => {
+                        expect(err.message).to.equal('Oops');
+                    }
+                );
         });
     });
 });
